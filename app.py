@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import base64
 from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 
@@ -25,3 +26,8 @@ def subir_imagen():
         "tipo": tipo,
         "base64": base64_data
     })
+
+# === PUNTO CLAVE: puerto dinámico para Render ===
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # Render asigna dinámicamente el puerto
+    app.run(host="0.0.0.0", port=port)
